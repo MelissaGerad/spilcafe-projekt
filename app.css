@@ -9,7 +9,7 @@
   --third-color: #FFF6F1;
 
   /* Text - colors */
-  --primary-text: white;
+  --primary-text: #FFF6F1;
   --secondary-text: black;
 
   /* Backgrounds */
@@ -184,11 +184,57 @@ header h1 {
   font-weight: 500;
   letter-spacing: 5px;
 }
+/* =====================
+   HERO SEKTION
+   ===================== */
 
+.hero-section {
+  min-height: 500px;
+  padding: 150px 2rem 4rem;
+  background: var(--third-color);
+  display: flex;
+  align-items: left;
+  justify-content: left;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.hero-text {
+  color: #492E2E;
+  text-align: left;
+}
+
+.hero-text h1 {
+  color: #492E2E;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text h2 {
+  color: #492E2E;
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.hero-text p {
+  color: #492E2E;
+  font-family: "Trebuchet MS";
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
 footer {
   background: var(--primary-color);
   color: var(--primary-text);
-  text-align: center;
+  text-align: left;
   padding: 2rem 1rem;
   margin-top: 4rem;
 }
