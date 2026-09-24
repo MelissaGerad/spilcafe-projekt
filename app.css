@@ -4,16 +4,16 @@
 
 :root {
   /* Colors */
-  --primary-color: #BF171C;
+  --primary-color: #505C38;
   --secondary-color: #000000;
-  --third-color: #f6c9c9;
+  --third-color: #FFF6F1;
 
   /* Text - colors */
   --primary-text: white;
   --secondary-text: black;
 
   /* Backgrounds */
-  --background: #BF171C;
+  --background: #505C38;
   --background-card: #f6c9c9;
 
   /* Semantic */
@@ -37,7 +37,7 @@
 }
 
 body {
-  font-family: "luckiest guy";
+  font-family: "arial unicode MS";
   font-size: 2rem;
   line-height: 1.6;
   background: var(--third-color);
