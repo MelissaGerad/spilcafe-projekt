@@ -5,59 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BRÆTSPIL CAFE</title>
     <link rel="stylesheet" href="app.css" />
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <!--luckiest guy og poppins font-->
+
     <link
       href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet">
   </head>
-
   <body>
-    <header>
-      <h1>Brætspils Oversigt</h1>
-    </header>
-
-    <main>
-      <!-- Filter bar med alle filtreringsmuligheder -->
-      <section class="filterbar">
-        <!-- Øverste række: Søg og genre -->
-        <div class="filter-row-main">
-          <div class="filter-group search-group">
-            <label for="search-input"> Søg</label>
-            <input type="text" id="search-input" placeholder="Søg efter et spil..." />
-          </div>
-
-          <div class="filter-group">
-            <label for="genre-select"> Kategori</label>
-            <select id="genre-select">
-              <option value="all">Alle kategorier</option>
-              <!-- Kategorier indsættes dynamisk via JavaScript -->
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="sort-select"> Sortering</label>
-            <select id="sort-select">
-              <option value="none">Ingen sortering</option>
-              <option value="title">Titel (A-Å)</option>
-              <option value="rating">Rating (højeste først)</option>
-            </select>
-          </div>
-        </div>
     </main>
 <header>
+  <div class="logo-container">
+    <img src="img/spilcafe.logo.webp" alt="Brætspil Cafe Logo" class="logo-img">
+  </div>
   <h1>BRÆTSPIL CAFE</h1>
-</header>
-
-          <!-- Rating range filter -->
-          <div class="filter-group range-group">
-            <label class="range-label"> Rating</label>
-            <div class="range-inputs">
-              <input type="number" id="rating-from" placeholder="0.0" min="0" max="10" step="0.1" />
-              <span class="range-separator">→</span>
-              <input type="number" id="rating-to" placeholder="10.0" min="0" max="10" step="0.1" />
-            </div>
-          </div>
+ 
 <!-- Hero sektion -->
 <section class="hero-section">
   <div class="hero-content">
@@ -67,37 +27,32 @@
       <p>
         Slut med scrolling, nu skal der rulles med terninger!
         Kom forbi og få en hyggelig dag.
-      </p>
+       </p>
+
+       <div class="hero-buttons">
+       <a href="#lokation" class="hero-btn"> Find lokation</a>
+
+      <a href="#book bord" class="hero-btn">Book bord</a>
+      </div>
+     <!-- Højre side: Kort-billedet -->
+    <div class="hero-right">
+      <img src="img/Component 1.png" alt="Spillekort">
     </div>
   </div>
 </section>
 
-          <!-- Ryd alle filtre knap -->
-          <button id="clear-filters" class="clear-btn">
-            <span class="btn-icon">🗑️</span>
-            <span class="btn-text">Nulstil filtre</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- spil grid -->
-      <section id="game-list" class="game-grid">
-        <!-- spil vil blive indsat her dynamisk -->
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
+<!-- Footer -->
 <footer class="footer">
-    <div class="footer-contact">
-        <p>Kontakt os:</p>
-        <p>Tlf: 43280913</p>
-    </div>
+  <div class="footer-contact">
+    <p>Kontakt os:</p>
+    <p>Tlf: 43280913</p>
+  </div>
 
-    <div class="footer-social">
-    </div>
+  <div class="footer-social">
+  </div>
 </footer>
-    </footer>
+   
+
 
     <!-- Game Detail Modal -->
     <dialog id="game-dialog">
