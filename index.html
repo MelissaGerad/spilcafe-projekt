@@ -11,13 +11,14 @@
       rel="stylesheet">
   </head>
   <body>
-    </main>
 <header>
+  <h1>BRÆTSPIL CAFE</h1>
   <div class="logo-container">
     <img src="img/spilcafe.logo.webp" alt="Brætspil Cafe Logo" class="logo-img">
   </div>
-  <h1>BRÆTSPIL CAFE</h1>
- 
+</header>
+
+<main>
 <!-- Hero sektion -->
 <section class="hero-section">
   <div class="hero-content">
@@ -42,14 +43,17 @@
     </div>
   </div>
 </section>
+
 <section class="filterbar">
-          <h3>Spil oversigt</h3>
-   <p class="spiloversigtekst">vores fulde samling af brætspil — søg efter et bestemt spil, eller vælg en kategori som familiespil, eventyr eller strategi.</p>
+     <p class="section-label">SPILBIBLIOTEK</p>
+     <h2>Find dit næste spil</h2>
+   <p class="spiloversigtekst">Søg efter et spil eller vælg en genre.</p>
        
         <!-- Øverste række: Søg og genre -->
     <form class="filter-row-main" role="search" >
-    <label class="søg"> 
-    <img src="img/Vector.svg" alt="" class="ikon">
+    <label class="søg">
+    <span>Søg efter spil</span>
+   
     <input type="text" id="search-input" list="spilforslag" placeholder="Søg efter et spil..." 
      aria-label="Søg efter spil" /> 
    <datalist id="spilforslag"></datalist> </label>
@@ -58,11 +62,11 @@
     </select>
   </form>
 </section>
-  
 
+  <p id="results-count" aria-live="polite"></p>
 
-
-
+  <h2 class="games-heading">Spiloversigt</h2>
+  <section id="game-list" aria-live="polite"></section>
 
 <!-- Footer -->
 <footer class="footer">
@@ -70,11 +74,8 @@
     <p>Kontakt os:</p>
     <p>Tlf: 43280913</p>
   </div>
-
-  <div class="footer-social">
-  </div>
 </footer>
-   
+</main>
 
 
     <!-- Game Detail Modal -->
