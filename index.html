@@ -34,12 +34,35 @@
 
       <a href="#book bord" class="hero-btn">Book bord</a>
       </div>
-     <!-- Højre side: Kort-billedet -->
+    </div>
+
+    <!-- Højre side: Kort-billedet -->
     <div class="hero-right">
       <img src="img/Component 1.png" alt="Spillekort">
     </div>
   </div>
 </section>
+<section class="filterbar">
+          <h3>Spil oversigt</h3>
+   <p class="spiloversigtekst">vores fulde samling af brætspil — søg efter et bestemt spil, eller vælg en kategori som familiespil, eventyr eller strategi.</p>
+       
+        <!-- Øverste række: Søg og genre -->
+    <form class="filter-row-main" role="search" >
+    <label class="søg"> 
+    <img src="img/Vector.svg" alt="" class="ikon">
+    <input type="text" id="search-input" list="spilforslag" placeholder="Søg efter et spil..." 
+     aria-label="Søg efter spil" /> 
+   <datalist id="spilforslag"></datalist> </label>
+       <select id="genre-select" aria-label="Kategori" >
+      <option value="all">Vælg kategori</option>
+    </select>
+  </form>
+</section>
+  
+
+
+
+
 
 <!-- Footer -->
 <footer class="footer">
