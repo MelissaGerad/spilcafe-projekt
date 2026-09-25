@@ -9,17 +9,13 @@ let allGames = [];
 
 // #1: Initialize the app - sæt event listeners og hent data
 function initApp() {
-  getGames(); // Hent film data fra JSON fil
+  getGames().catch(showGamesError); // Hent spil data fra JSON fil
 
-  // Event listeners for alle filtre - kører filterMovies når brugeren ændrer noget
   document.querySelector("#search-input").addEventListener("input", filterGames);
   document.querySelector("#genre-select").addEventListener("change", filterGames);
-  document.querySelector("#sort-select").addEventListener("change", filterGames);
-  document.querySelector("#rating-from").addEventListener("input", filterGames);
-  document.querySelector("#rating-to").addEventListener("input", filterGames);
 
-  // Event listener for clear-knappen - rydder alle filtre
-  document.querySelector("#clear-filters").addEventListener("click", clearAllFilters);
+  const filterForm = document.querySelector(".filter-row-main");
+  filterForm.addEventListener("submit", event => event.preventDefault());
 }
 
 // #2: Fetch games from JSON file - asynkron funktion der henter data
@@ -31,14 +27,25 @@ async function getGames() {
   allGames = await response.json();
 
   populateGenreDropdown(); // Udfyld dropdown med genrer fra data
+  lavForslag();
   displayGames(allGames); // Vis alle games ved start
+}
+
+function showGamesError() {
+  const resultsCount = document.querySelector("#results-count");
+  const gameList = document.querySelector("#game-list");
+
+  resultsCount.textContent = "";
+  gameList.innerHTML = "<p class=\"no-results\">Spillene kunne ikke indlæses. Genindlæs siden og prøv igen.</p>";
 }
 
 // ===== VISNING AF SPIL =====
 // #3: Display all games - vis en liste af spil på siden
 function displayGames(games) {
   const gameList = document.querySelector("#game-list"); // Find container til spil
+  const resultsCount = document.querySelector("#results-count");
   gameList.innerHTML = ""; // Ryd gammel liste (fjern alt HTML indhold)
+  resultsCount.textContent = `${games.length} spil fundet`;
 
   // Hvis ingen spil matcher filtrene, vis en besked til brugeren
   if (games.length === 0) {
@@ -85,7 +92,7 @@ function displayGame(game) {
   newCard.addEventListener("keydown", function (event) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault(); // Forhindre scroll ved mellemrum
-      showgameModal(Game); // Vis modal med spil detaljer
+      showGameModal(game); // Vis modal med spil detaljer
     }
   });
 }
@@ -118,6 +125,7 @@ function populateGenreDropdown() {
 function showGameModal(game) {
   // Find modal indhold container og byg HTML struktur dynamisk
   //tilføj indhold fra JSON 
+
   document.querySelector("#dialog-content").innerHTML = /*html*/ `
     <img src="${game.image}" alt="Poster af ${game.title}" class="game-poster">
     <div class="dialog-details">
@@ -156,58 +164,32 @@ function clearAllFilters() {
 
 // #8: Komplet filtrering med alle funktioner - den vigtigste funktion!
 function filterGames() {
-  // Hent alle filter værdier fra input felterne
-  const searchValue = document.querySelector("#search-input").value.toLowerCase(); // Konvertér til lowercase for case-insensitive søgning
+  const searchValue = document.querySelector("#search-input").value.trim().toLowerCase();
   const genreValue = document.querySelector("#genre-select").value;
-  const sortValue = document.querySelector("#sort-select").value;
 
-  // Number() konverterer string til tal, || 0 giver default værdi hvis tomt
-  const ratingFrom = Number(document.querySelector("#rating-from").value) || 0;
-  const ratingTo = Number(document.querySelector("#rating-to").value) || 5;
+  const filteredGames = allGames.filter(game => {
+    const titleMatches = game.title.toLowerCase().includes(searchValue);
+    const genreMatches = genreValue === "all" || game.genre.includes(genreValue);
+    return titleMatches && genreMatches;
+  });
 
-  // Start med alle spil - kopiér til ny variabel så vi ikke ændrer originalen
-  let filteredGames = allGames;
-
-  // FILTER 1: Søgetekst - filtrer på spil titel
-  if (searchValue) {
-    // Kun filtrer hvis der er indtastet noget
-    filteredGames = filteredGames.filter(game => {
-      // includes() checker om søgeteksten findes i titlen
-      return game.title.toLowerCase().includes(searchValue);
-    });
-  }
-
-  // FILTER 2: Genre - filtrer på valgt genre
-  if (genreValue !== "all") {
-    // Kun filtrer hvis ikke "all" er valgt
-    filteredGames = filteredGames.filter(game => {
-      // includes() checker om genren findes i spillets genre array
-      return game.genre.includes(genreValue);
-    });
-  }
-
-
-  // FILTER 4: Rating range - filtrer spil mellem to ratings
-  if (ratingFrom > 0 || ratingTo < 10) {
-    // Kun filtrer hvis der er sat grænser
-    filteredGames = filteredGames.filter(game => {
-      // Check om spillets rating er mellem min og max værdi
-      return game.rating >= ratingFrom && game.rating <= ratingTo;
-    });
-  }
-
-  // SORTERING (altid til sidst efter alle filtre er anvendt)
-  if (sortValue === "title") {
-    // Alfabetisk sortering - localeCompare() håndterer danske bogstaver korrekt
-    filteredGames.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sortValue === "year") {
-    // Sortér på år (nyeste først) - b - a giver descending order
-    filteredGames.sort((a, b) => b.year - a.year);
-  } else if (sortValue === "rating") {
-    // Sortér på rating (højeste først) - b - a giver descending order
-    filteredGames.sort((a, b) => b.rating - a.rating);
-  }
-
-  // Vis de filtrerede spil på siden
   displayGames(filteredGames);
+}
+// Din nye søgefunktion
+function søgSpil() {
+  const søgTekst = document.querySelector("#search-input").value.toLowerCase();
+  const resultat = allGames.filter(game => game.title.toLowerCase().includes(søgTekst));
+  displayGames(resultat);
+}
+
+// Din nye forslag-funktion
+function lavForslag() {
+  const liste = document.querySelector("#spilforslag");
+  if (!liste) return;
+  
+  liste.innerHTML = "";
+
+  for (const game of allGames) {
+    liste.insertAdjacentHTML("beforeend", /*html*/ `<option value="${game.title}"></option>`);
+  }
 }
