@@ -259,8 +259,12 @@ header {
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(88, 111, 113, 0.2);
   color: var(--primary-text);
-  padding: 0.4rem 0;
+  min-height: 72px;
+  padding: 0.4rem 1rem;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: sticky;
   top: 0;
   left: 0;
@@ -273,15 +277,43 @@ header h1 {
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   font-weight: 500;
   letter-spacing: 5px;
-  margin-top: -0.35rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
 }
 
+header .logo-container {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 header .logo-img {
   height: 55px;                /* Størrelsen på logoet */
   width: auto;
-  display:flex;
-  position:left;
+  display: block;
+}
+
+header .header-book-btn {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: var(--third-color);
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+header .header-book-btn:hover {
+  background: var(--warning);
 }
 
 /* =====================
@@ -827,7 +859,19 @@ dialog#game-dialog::backdrop {
     margin: 0 auto;
   }
   header h1 {
-    font-size: 1.75rem;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+  }
+  header .logo-container {
+    left: 0.5rem;
+  }
+  header .logo-img {
+    height: 42px;
+  }
+  header .header-book-btn {
+    right: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
   }
 }
 
