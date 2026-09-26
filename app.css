@@ -262,6 +262,7 @@ header {
   backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(88, 111, 113, 0.2);
   color: var(--primary-text);
+  min-height: 72px;
   padding: 0.4rem 1.25rem;
   position: sticky;
   top: 0;
