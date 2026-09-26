@@ -32,10 +32,8 @@ async function getGames() {
 }
 
 function showGamesError() {
-  const resultsCount = document.querySelector("#results-count");
   const gameList = document.querySelector("#game-list");
 
-  resultsCount.textContent = "";
   gameList.innerHTML = "<p class=\"no-results\">Spillene kunne ikke indlæses. Genindlæs siden og prøv igen.</p>";
 }
 
@@ -43,9 +41,7 @@ function showGamesError() {
 // #3: Display all games - vis en liste af spil på siden
 function displayGames(games) {
   const gameList = document.querySelector("#game-list"); // Find container til spil
-  const resultsCount = document.querySelector("#results-count");
   gameList.innerHTML = ""; // Ryd gammel liste (fjern alt HTML indhold)
-  resultsCount.textContent = `${games.length} spil fundet`;
 
   // Hvis ingen spil matcher filtrene, vis en besked til brugeren
   if (games.length === 0) {

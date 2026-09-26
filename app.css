@@ -230,14 +230,6 @@ main {
   flex: 0 0 auto;
 }
 
-#results-count {
-  color: var(--primary-color);
-  font-family: "Trebuchet MS", sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  margin: 1rem 0 0;
-}
-
 .games-heading {
   color: #492E2E;
   font-family: "Trebuchet MS", sans-serif;
