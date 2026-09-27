@@ -7,6 +7,51 @@ document.addEventListener("DOMContentLoaded", initApp);
 // Global variabel til alle film - tilgængelig for alle funktioner
 let allGames = [];
 
+const genreCategories = [
+  { value: "adults", label: "Voksenspil" },
+  { value: "children", label: "Børnespil" },
+  { value: "family", label: "Familiespil" },
+  { value: "boardgames", label: "Brætspil" },
+  { value: "cards", label: "Kortspil" },
+  { value: "strategy", label: "Strategispil" },
+  { value: "roleplaying", label: "Rollespil" },
+  { value: "dice", label: "Terningespil" },
+  { value: "other", label: "Øvrige spil" },
+];
+
+function getGameGenres(game) {
+  const genres = Array.isArray(game.genre) ? game.genre : [game.genre];
+  return genres.filter(Boolean).map(genre => genre.toLowerCase());
+}
+
+function matchesGenreCategory(game, category) {
+  const genres = getGameGenres(game);
+  const knownGenres = ["familie", "bræt", "kort", "strategi", "rolle", "role", "rpg", "terning", "dice"];
+
+  switch (category) {
+    case "adults":
+      return Number(game.age) >= 15;
+    case "children":
+      return Number(game.age) <= 7;
+    case "family":
+      return genres.some(genre => genre.includes("familie"));
+    case "boardgames":
+      return genres.some(genre => genre.includes("bræt"));
+    case "cards":
+      return genres.some(genre => genre.includes("kort"));
+    case "strategy":
+      return genres.some(genre => genre.includes("strategi"));
+    case "roleplaying":
+      return genres.some(genre => /rolle|role|rpg/.test(genre));
+    case "dice":
+      return genres.some(genre => /terning|dice/.test(genre));
+    case "other":
+      return !genres.some(genre => knownGenres.some(knownGenre => genre.includes(knownGenre)));
+    default:
+      return false;
+  }
+}
+
 // #1: Initialize the app - sæt event listeners og hent data
 function initApp() {
   getGames().catch(showGamesError); // Hent spil data fra JSON fil
@@ -66,9 +111,8 @@ function displayGame(game) {
            alt="Poster of ${game.title}" 
            class="game-poster" />
       <div class="game-info">
-        <h3>${game.title} <span class="game-year">(${game.year})</span></h3>
+        <h3>${game.title}${game.year ? ` <span class="game-year">(${game.year})</span>` : ""}</h3>
         <p class="game-genre">${game.genre}</p>
-        <p class="game-rating">⭐ ${game.rating}</p>
       </div>
     </article>
   `;
@@ -94,26 +138,16 @@ function displayGame(game) {
 }
 
 // ===== DROPDOWN OG MODAL FUNKTIONER =====
-// #5: Udfyld genre-dropdown med alle unikke genrer fra data
+// #5: Udfyld dropdown med brede spil-kategorier
 function populateGenreDropdown() {
   const genreSelect = document.querySelector("#genre-select"); // Find genre dropdown
-  const genres = new Set(); // Set fjerner automatisk dubletter
+  genreSelect.innerHTML = /*html*/ `<option value="all">Alle spil</option>`;
 
-  // Samle alle unikke genrer fra alle spil
-  // Hvert spil kan have flere genrer (array), så vi løber gennem dem alle
-  for (const game of allGames) {
-    for (const genre of game.genre) {
-      genres.add(genre); // Set sikrer kun unikke værdier
-    }
-  }
-
-  // Fjern gamle options undtagen 'Alle genrer' (reset dropdown)
-  genreSelect.innerHTML = /*html*/ `<option value="all">Alle genrer</option>`;
-
-  // Sortér genres alfabetisk og tilføj dem som options
-  const sortedGenres = [...genres].sort(); // Konvertér Set til Array og sortér genrer
-  for (const genre of sortedGenres) {
-    genreSelect.insertAdjacentHTML("beforeend", /*html*/ `<option value="${genre}">${genre}</option>`);
+  for (const category of genreCategories) {
+    genreSelect.insertAdjacentHTML(
+      "beforeend",
+      /*html*/ `<option value="${category.value}">${category.label}</option>`
+    );
   }
 }
 
@@ -161,7 +195,7 @@ function filterGames() {
 
   const filteredGames = allGames.filter(game => {
     const titleMatches = game.title.toLowerCase().includes(searchValue);
-    const genreMatches = genreValue === "all" || game.genre.includes(genreValue);
+    const genreMatches = genreValue === "all" || matchesGenreCategory(game, genreValue);
     return titleMatches && genreMatches;
   });
 
