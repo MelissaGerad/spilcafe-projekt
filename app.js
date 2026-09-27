@@ -125,18 +125,14 @@ function showGameModal(game) {
   document.querySelector("#dialog-content").innerHTML = /*html*/ `
     <img src="${game.image}" alt="Poster af ${game.title}" class="game-poster">
     <div class="dialog-details">
-      <p class="game-genre">${game.genre}</p>
-      <p class="game-description">${game.description}</p>
-      <p class="game-playtime">${game.playtime}</p>
-      <p class="game-players">${game.players}</p>
-      <p class="game-language">${game.language}</p>
-      <p class="game-rating">⭐ ${game.rating}</p>
-      <p class="game-age">${game.age}</p>
-      <p class="game-difficulty">${game.difficulty}</p>
-      <p class="game-location">${game.location}</p>
-      <p class="game-shelf">${game.shelf}</p>
-      <p class="game-available">${game.available}</p>
-      <p class="rules">${game.rules}</p>
+      <p class="game-genre">${game.genre} spil</p>
+      <p class="game-playtime"><strong>${game.playtime} min</strong></p>
+      <p class="game-players"><strong>Spillere:</strong> ${game.players.min}–${game.players.max}</p>
+      <p class="game-language"><strong>Sprog:</strong> ${game.language}</p>
+
+      <p class="game-age"><strong>Alder:</strong> ${game.age}+ år</p>
+      <p class="game-difficulty"><strong>Sværhedsgrad:</strong> ${game.difficulty}</p>
+      <p class="rules">${game.rules} regler</p>
     </div>
   `;
 

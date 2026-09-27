@@ -743,10 +743,6 @@ dialog#game-dialog::backdrop {
   font-size: 1.1rem !important;
   line-height: 1.7 !important;
   margin-top: 1rem !important;
-  padding: 1rem;
-  background: var(--third-color);
-  border-radius: var(--radius);
-  border-left: 4px solid var(--primary-color);
   font-style: italic;
 }
 
