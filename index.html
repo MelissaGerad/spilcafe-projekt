@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="app.css" />
 
   </head>
-  <body>
+  <body id="top">
 <header>
   <h1>BRÆTSPIL CAFE</h1>
   <div class="logo-container">
-    <img src="img/spilcafe.logo.webp" alt="Brætspil Cafe Logo" class="logo-img">
+    <a href="#top" class="logo-link" tabindex="0" aria-label="Brætspil Cafe – gå til toppen">
+      <img src="img/spilcafe.logo.webp" alt="Brætspil Cafe Logo" class="logo-img">
+    </a>
   </div>
 
-  <a href="#book bord" class="header-btn">Book bord</a>
+  <a href="#book bord" class="header-btn" tabindex="0">Book bord</a>
 
 
 </header>
@@ -32,9 +34,9 @@
        </p>
 
        <div class="hero-buttons">
-       <a href="#lokation" class="hero-btn"> Find lokation</a>
+      <a href="#lokation" class="hero-btn" tabindex="0"> Find lokation</a>
 
-      <a href="#book bord" class="hero-btn">Book bord</a>
+          <a href="#book bord" class="hero-btn" tabindex="0">Book bord</a>
       </div>
     </div>
 
@@ -55,10 +57,10 @@
     <label class="søg">
     <span>Søg efter spil</span>
    
-    <input type="text" id="search-input" list="spilforslag" placeholder="Søg efter et spil..." 
+    <input type="text" id="search-input" list="spilforslag" placeholder="Søg efter et spil..." tabindex="0"
      aria-label="Søg efter spil" /> 
    <datalist id="spilforslag"></datalist> </label>
-       <select id="genre-select" aria-label="Kategori" >
+      <select id="genre-select" aria-label="Kategori" tabindex="0">
       <option value="all">Vælg kategori</option>
     </select>
   </form>
@@ -92,7 +94,7 @@
     <!-- Game Detail Modal -->
     <dialog id="game-dialog">
       <form method="dialog">
-        <button id="close-dialog" aria-label="Close">✕</button>
+        <button id="close-dialog" aria-label="Close" tabindex="0">✕</button>
         <div id="dialog-content">
           <!-- Game details will be injected here via JavaScript -->
         </div>
