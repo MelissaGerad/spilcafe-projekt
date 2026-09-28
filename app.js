@@ -113,6 +113,7 @@ function displayGame(game) {
       <div class="game-info">
         <h3>${game.title}${game.year ? ` <span class="game-year">(${game.year})</span>` : ""}</h3>
         <p class="game-genre">${game.genre}</p>
+        <button class="read-more-button" type="button">Læs mere om spillet</button>
       </div>
     </article>
   `;
@@ -159,6 +160,7 @@ function showGameModal(game) {
   document.querySelector("#dialog-content").innerHTML = /*html*/ `
     <img src="${game.image}" alt="Poster af ${game.title}" class="game-poster">
     <div class="dialog-details">
+      <h2>${game.title}</h2>
       <p class="game-genre">${game.genre} spil</p>
       <p class="game-playtime"><strong>${game.playtime} min</strong></p>
       <p class="game-players"><strong>Spillere:</strong> ${game.players.min}–${game.players.max}</p>
